@@ -4,7 +4,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
-    HUGGING_FACE_ACCESS_TOKEN: str
+    HUGGING_FACE_ACCESS_TOKEN: str = ""
 
     model_config = SettingsConfigDict(env_file=".env")
 
