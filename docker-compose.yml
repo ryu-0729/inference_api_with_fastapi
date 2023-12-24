@@ -3,7 +3,10 @@ services:
   web:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.local
+    command: ["uvicorn", "app.main:app", "--reload", "--host", "0.0.0.0", "--port", "8080" ]
     env_file: .env
     ports:
       - "8080:8080"
+    volumes:
+      - .:/code

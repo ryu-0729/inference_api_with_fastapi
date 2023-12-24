@@ -1,0 +1,33 @@
+{
+	"name": "Inference api with fastapi",
+	"dockerComposeFile": [
+		"../docker-compose.yml"
+	],
+	"service": "web",
+	"workspaceFolder": "/code",
+	"settings": {
+		"python.defaultInterpreterPath": "/usr/local/bin/python",
+		// flake8
+		"python.linting.flake8Path": "/usr/local/bin/flake8",
+		"python.linting.flake8Enabled": true,
+		// blak
+		"python.formatting.blackPath": "/usr/local/bin/black",
+		"python.formatting.provider": "black",
+		// mypy
+		"python.linting.mypyPath": "/usr/local/bin/mypy",
+		"python.linting.mypyEnabled": true,
+		"[python]": {
+			"editor.formatOnSave": true,
+			"editor.defaultFormatter": "ms-python.black-formatter"
+		}
+	},
+	"extensions": [
+		"ms-python.python",
+		// TODO: Pylanceは使用するかは検討
+		// "ms-python.vscode-pylance",
+		"ms-python.black-formatter",
+		"ms-python.flake8",
+		"ms-python.isort",
+	],
+	"shutdownAction": "stopCompose"
+}
