@@ -4,7 +4,12 @@ from fastapi import APIRouter, Depends
 
 from app.core.config import settings
 from app.core.requestapi import RequestAPI
-from app.schemas.text import TextClassificationRequest, TextClassificationResponse
+from app.schemas.text import (
+    TextClassificationRequest,
+    TextClassificationResponse,
+    QuestionAnswerRequest,
+    QuestionAnswerResponse,
+)
 
 router = APIRouter()
 
@@ -22,4 +27,22 @@ def text_classification(
     response = TextClassificationResponse(
         textClassification=json.loads(api_response.text)
     )
+    return response
+
+
+@router.get("/question-answer", description="テキストの問題に答えるAPI")
+def question_answer(
+    req: QuestionAnswerRequest = Depends(),
+) -> QuestionAnswerResponse:
+    url = (
+        "https://api-inference.huggingface.co"
+        "/models/IProject-10/xlm-roberta-base-finetuned-squad2"
+    )
+    payload = json.dumps({"inputs": {"question": req.question, "context": req.context}})
+    api_response = request_api.request_post(url=url, payload=payload)
+
+    print(f"{api_response.text=}")
+
+    response = QuestionAnswerResponse(questionAnswer=json.loads(api_response.text))
+
     return response
