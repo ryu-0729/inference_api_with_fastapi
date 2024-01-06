@@ -41,8 +41,6 @@ def question_answer(
     payload = json.dumps({"inputs": {"question": req.question, "context": req.context}})
     api_response = request_api.request_post(url=url, payload=payload)
 
-    print(f"{api_response.text=}")
-
     response = QuestionAnswerResponse(questionAnswer=json.loads(api_response.text))
 
     return response
