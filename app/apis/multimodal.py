@@ -12,7 +12,9 @@ request_api = RequestAPI(access_token=settings.HUGGING_FACE_ACCESS_TOKEN)
 
 
 @router.get("/image-to-text", description="画像からテキストを生成するAPI")
-def image_to_text(req: ImageToTextRequest = Depends()) -> ImageToTextResponse:
+def image_to_text(
+    req: ImageToTextRequest = Depends(),
+) -> ImageToTextResponse:
     url = (
         "https://api-inference.huggingface.co/models/"
         "Salesforce/blip-image-captioning-large"
